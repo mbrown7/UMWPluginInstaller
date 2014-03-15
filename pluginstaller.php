@@ -21,3 +21,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+//hook for the menu page
+add_action('admin_menu','add_pluginstaller_menu');
+
+//menu page function
+function add_pluginstaller_menu(){
+	add_menu_page('PlugInstaller','PlugInstaller Menu','administrator','pluginstaller','pluginstaller_display_menu');
+}
+
+function pluginstaller_display_menu(){
+	require_once('pluginstaller_menu.php');
+}
+?>
