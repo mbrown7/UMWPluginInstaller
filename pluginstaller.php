@@ -34,9 +34,4 @@ function add_pluginstaller_menu(){
 function pluginstaller_display_menu(){
 	require_once('pluginstaller_menu.php');
 }
-
-//this reads the file into a string
-//read in the file that contains package information for all packages
-$package = file_get_contents('http://www.placeourfileishosted.com/');
-//alternative we can say ('./file.txt', true); to get the file from our directory if needed
 ?>
