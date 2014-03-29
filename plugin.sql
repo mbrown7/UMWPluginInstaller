@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS packages;
 GRANT ALL PRIVILEGES ON insult_generator.* to 'dtlt'@'localhost' identified by 'package';
 USE packages;
 
-CREATE TABLE IF NOT EXISTS `package` (
+CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `professor` varchar(50) DEFAULT NULL,
@@ -19,6 +19,13 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `packages_plugins` (
+  `package_id` int(11) NOT NULL,
+  `plugin_id` int(11) NOT NULL,
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`),
+  FOREIGN KEY (`plugin_id`) REFERENCES `plugins`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `themes` (
@@ -70,10 +77,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 );
 
 CREATE TABLE IF NOT EXISTS `pages_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
   FOREIGN KEY (`page_id`) REFERENCES `pages`(`id`),
   FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
 );
@@ -91,10 +96,8 @@ CREATE TABLE IF NOT EXISTS `tags` (
 );
 
 CREATE TABLE IF NOT EXISTS `pages_tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
   FOREIGN KEY (`page_id`) REFERENCES `pages`(`id`),
   FOREIGN KEY (`tag_id`) REFERENCES `tags`(`id`)
 );
