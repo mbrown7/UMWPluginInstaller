@@ -2,8 +2,8 @@
 import MySQLdb
 
 DATABASE='packages'
-DB_USER = 'assist'
-DB_PASSWORD = 'assist'
+DB_USER = 'dtlt'
+DB_PASSWORD = 'package'
 HOST = 'localhost'
 
 def db_connect():

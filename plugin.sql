@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS packages;
 CREATE DATABASE IF NOT EXISTS packages;
+GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'package';
 USE packages;
 
 CREATE TABLE IF NOT EXISTS `packages` (
