@@ -1,7 +1,7 @@
 # utils.py
 import MySQLdb
 
-DATABASE='session'
+DATABASE='packages'
 DB_USER = 'assist'
 DB_PASSWORD = 'assist'
 HOST = 'localhost'
