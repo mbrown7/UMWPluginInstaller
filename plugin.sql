@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
   `address` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `sticky` varchar(3) DEFAULT 'no',
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages` (
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `publish` varchar(3) DEFAULT 'yes',
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `slug` blob DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages_categories` (
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `rss_url` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages_tags` (
