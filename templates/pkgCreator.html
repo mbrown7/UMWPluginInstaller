@@ -7,11 +7,98 @@
 <body>
 <h1>WordPress Package Creator</h1>
 <form method="post" action="/pkgCreate">
-Package Name: <input type="text" name="package_name"> <br>
-Professor: <input type="text" name="professor"> <br>
-Course: <input type="text" name="course"> <br>
-Semester: <input type="text" name="semester"> <br>
-<input type="submit" value="Next" name="submit" />
+<table>
+<tr>
+	<td>Package Name</td><td><input type="text" name="package_name"></td>
+</tr><tr>
+	<td>Professor</td><td><input type="text" name="professor"></td>
+</tr><tr>
+	<td>Course</td><td><input type="text" name="course"></td>
+</tr><tr>
+	<td>Semester</td><td><input type="text" name="semester"></td>
+</tr>
+</table><br>
+
+
+<h3>Add Plugins</h3>
+<table>
+<tr>
+	<td>Plugin Name</td><td><input type="text" name="plugin_name" /></td>
+</tr><tr>
+	<td>Plugin URL</td><td><input type="url" name="plugin_url" /></td>
+</tr>
+</table>
+	
+	<span id="plugin_response"></span>
+
+
+<input type ="button" value=" + " onclick="addMorePlugins()" /><br>
+
+<br>
+<h3>Add a Theme</h3>
+<table>
+<tr>
+	<td>Theme Name</td><td><input type="text" name="theme_name" /></td>
+</tr><tr>
+	<td>Theme URL</td><td><input type="url" name="theme_url" /></td>
+</tr>
+</table>
+
+<br>
+<h3>Add Pages</h3>
+<table>
+<tr>
+	<td>Page Name</td><td><input type="text" name="page_name" /></td>
+</tr><tr>
+	<td>Description</td><td><textarea name="page_desc" rows=6 cols=42></textarea></td>
+</tr><tr>
+	<td>Allow comments </td><td><input type="radio" name="page_comments" checked="checked" value="true" /> Yes <input type="radio" name="page_comments" value="false" /> No </td>
+</tr><tr>
+	<td>Slug</td><td><textarea name="page_slug" rows=6 cols=42></textarea></td>
+</tr><tr>
+	<td>Publish</td><td><input type="radio" name="page_publish" checked="checked" value="true" /> Yes <input type="radio" name="page_publish" value="false" /> No </td>
+</tr>
+</table>
+
+<br>
+<h3>Categories</h3>
+<table>
+<tr>
+	<td>Category Name</td><td><input type="text" name="category_name" /></td>
+</tr><tr>
+	<td>Description</td><td><textarea name="category_desc" rows=6 cols=42></textarea></td>
+</tr><tr>
+	<td>Slug</td><td><textarea name="category_slug" rows=6 cols=42></textarea></td>
+</tr>
+</table>
+
+<br>
+<h3>Tags</h3>
+<table>
+<tr>
+	<td>Tag Name</td><td><input type="text" name="tag_name" /></td>
+</tr><tr>
+	<td>Slug</td><td><textarea name="tag_slug" rows=6 cols=42></textarea></td>
+</tr><tr>
+	<td>Count</td><td><input type="number" name="tag_count" /></td>
+</tr>
+</table>
+
+<br><input type="submit" value="Create Package" name="submit" />
+
 </form>
+
+
+<script>
+	var plugCountBox = 1;
+	var plugBoxName = 0;
+	
+	function addMorePlugins() {
+        	var plugBoxName = "textBox"+plugCountBox;
+        	document.getElementById('plugin_response').innerHTML+='<table><tr><td>Plugin Name</td><td><input type="text" name="plugin_name'+plugCountBox+'"/></td></tr><tr><td>Plugin URL</td><td><input type="url" name="plugin_url'+plugCountBox+'" /></td></tr></table>';
+	        plugCountBox += 1;  
+}
+</script>
+
 </body>
 </html>

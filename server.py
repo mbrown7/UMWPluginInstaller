@@ -21,20 +21,12 @@ def createPkg():
 
 		query = "INSERT INTO packages (name, professor, course, semester) VALUES('%s', '%s', '%s', '%s')" % (packageName, professor, course, semester)
 		cur.execute(query)
+		
 		db.commit()
 		if cur.fetchone():
-			return redirect(url_for('addPlugins'))
+			return redirect(url_for('/createPkg'))
 
 	return render_template('pkgCreator.html')
-
-@app.route('/addPlugins', methods=['GET', 'POST'])
-def addPackages():
-	db = utils.db_connect()
-	cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
-
-	#if request.method =='POST':
-
-	return render_template('addPlugins.html')
 
 if __name__ == '__main__':
 	app.debug=True
