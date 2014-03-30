@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `address` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `packages_plugins` (
