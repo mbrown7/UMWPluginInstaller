@@ -1,10 +1,8 @@
 DROP DATABASE IF EXISTS packages;
 CREATE DATABASE IF NOT EXISTS packages;
-<<<<<<< HEAD
-GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'dtlt';
-=======
-GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'package';
->>>>>>> 14ed97a25aa520a1a38fe76938495899416276d6
+
+GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'host.umwdomains.com' identified by 'package';
+
 USE packages;
 
 CREATE TABLE IF NOT EXISTS `packages` (
