@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS packages;
 CREATE DATABASE IF NOT EXISTS packages;
-GRANT ALL PRIVILEGES ON insult_generator.* to 'dtlt'@'localhost' identified by 'package';
+GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'dtlt';
 USE packages;
 
 CREATE TABLE IF NOT EXISTS `package` (
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `excerpt` varchar(50) DEFAULT NULL,
   `content` blob DEFAULT NULL,
   `format` varchar(50) DEFAULT NULL,
-  `allow_comments` varchar(3) DEFAULT 'yes',
-  `sticky` varchar(3) DEFAULT 'no',
+  `allow_comments` BOOL DEFAULT 1,
+  `sticky` BOOL DEFAULT 0,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
   `description` blob DEFAULT NULL,
-  `allow_comments` varchar(3) DEFAULT 'yes',
+  `allow_comments` BOOL DEFAULT 1,
   `slug` blob DEFAULT NULL,
-  `publish` varchar(3) DEFAULT 'yes',
+  `publish` BOOL DEFAULT 1,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)

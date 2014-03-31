@@ -1,15 +1,19 @@
+<?php
+	$db = mysqli_connect('localhost', 'dtlt', 'dtlt', 'umwpluginstaller')
+		or die(mysqli_error($db));
+		
+	$db_selected = mysql_select_db ('packages', $db);
+
+	if (!$db_selected) {
+		die ("Can't Connect :" .mysql_error());
+	}
+?>
+
 <div class="wrap">
 <h2>PlugInstaller</h2>
 <h3>PlugInstaller Menu</h3>
 
-<?php
-//this reads the file into a string
-//read in the file that contains package information for all packages
-$package = file_get_contents('http://packages.umwdomains.com/wp-content/uploads/2014/03/testfile.txt');
-//alternative we can say ('./file.txt', true); to get the file from our directory if needed
-?>
-
-<table cellpadding="0" cellspacing="0"><tr>
+<table><tr>
 <form action="pluginstaller_search.php" method="post">
 <td>
 <input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
@@ -21,9 +25,11 @@ $package = file_get_contents('http://packages.umwdomains.com/wp-content/uploads/
 <td>
 	<select name="package">
 		<option selected disabled>Choose a package</option>
-		<?php
-		// Programmatically fill in option tags here.
-		?>
+		<?php // SQL QUERY TO RETRIEVE EVERY TYPE OF CUSTOMER
+			$sql = "SELECT name FROM `package` GROUP BY `name`";
+			$result = mysql_query($sql);
+			while($row = mysql_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
+        ?>
 	</select></td>
 
 	<td><?php submit_button('Install') ?></td>
