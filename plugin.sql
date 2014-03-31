@@ -1,9 +1,13 @@
 DROP DATABASE IF EXISTS packages;
 CREATE DATABASE IF NOT EXISTS packages;
+<<<<<<< HEAD
 GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'dtlt';
+=======
+GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'package';
+>>>>>>> 14ed97a25aa520a1a38fe76938495899416276d6
 USE packages;
 
-CREATE TABLE IF NOT EXISTS `package` (
+CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `professor` varchar(50) DEFAULT NULL,
@@ -18,7 +22,14 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `address` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `packages_plugins` (
+  `package_id` int(11) NOT NULL,
+  `plugin_id` int(11) NOT NULL,
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`),
+  FOREIGN KEY (`plugin_id`) REFERENCES `plugins`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `themes` (
@@ -27,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
   `address` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -43,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `sticky` BOOL DEFAULT 0,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages` (
@@ -55,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `publish` BOOL DEFAULT 1,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -66,14 +77,12 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `slug` blob DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
   FOREIGN KEY (`page_id`) REFERENCES `pages`(`id`),
   FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`)
 );
@@ -87,14 +96,12 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `rss_url` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)
+  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `pages_tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
   FOREIGN KEY (`page_id`) REFERENCES `pages`(`id`),
   FOREIGN KEY (`tag_id`) REFERENCES `tags`(`id`)
 );
