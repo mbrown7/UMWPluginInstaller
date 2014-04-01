@@ -42,8 +42,8 @@ def createPkg():
 		pid = pida[0]['id']
 	#Get the number of plugins there will be
 		numberOfPlugins = MySQLdb.escape_string(request.form['num_plug'])
-		numberOfPluginsInt = int(numberOfPlugins)
-		for x in range(1, numberOfPluginsInt+1)
+		numberOfPluginsInt = int(numberOfPlugins)+1
+		for x in range(1, numberOfPluginsInt):
 			string1 = 'plugin_name' + str(x)
 			string2 = 'plugin_url' + str(x)
 			#Get the plugin data
@@ -64,8 +64,8 @@ def createPkg():
 			db.commit()
 	#Get the number of posts there will be
 		numberOfPosts = MySQLdb.escape_string(request.form['num_posts'])
-		numberOfPostsInt = int(numberOfPosts)
-		for x in range(1, numberOfPostsInt+1)
+		numberOfPostsInt = int(numberOfPosts)+1
+		for x in range(1, numberOfPostsInt):
 			string1 = 'post_title' + str(x)
 			string2 = 'post_content' + str(x)
 			#Get the post data
@@ -77,8 +77,8 @@ def createPkg():
 			db.commit()
 	#Get the number of pages there will be
 		numberOfPages = MySQLdb.escape_string(request.form['num_pages'])
-		numberOfPagesInt = int(numberOfPages)
-		for x in range(1, numberOfPagesInt+1)
+		numberOfPagesInt = int(numberOfPages)+1
+		for x in range(1, numberOfPagesInt):
 			string1 = 'page_name' + str(x)
 			string2 = 'page_desc' + str(x)
 			string3 = 'page_slug' + str(x)
@@ -97,8 +97,8 @@ def createPkg():
 			
 	#Get number of categories
 		numberOfCategories = MySQLdb.escape_string(request.form['num_cats'])
-		numberOfCategoriesInt = int(numberOfCategories)
-		for x in range(1, numberOfCategoriesInt+1)
+		numberOfCategoriesInt = int(numberOfCategories)+1
+		for x in range(1, numberOfCategoriesInt):
 			string1 = 'category_name' + str(x)
 			string2 = 'category_desc' + str(x)
 			string3 = 'category_slug' + str(x)
@@ -112,8 +112,8 @@ def createPkg():
 			db.commit()
 	#Get number of tags
 		numberOfTags = MySQLdb.escape_string(request.form['num_tags'])
-		numberOfTagsInt = int(numberOfTags)
-		for x in range(1, numberOfTagsInt+1)
+		numberOfTagsInt = int(numberOfTags)+1
+		for x in range(1, numberOfTagsInt):
 			string1 = 'tag_name' + str(x)
 			string2 = 'tag_slug' + str(x)
 			#Get tag information
