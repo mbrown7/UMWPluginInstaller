@@ -5,6 +5,13 @@ GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'host.umwdomains.com' identified by
 
 USE packages;
 
+CREATE TABLE IF NOT EXISTS `themes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -28,13 +35,6 @@ CREATE TABLE IF NOT EXISTS `packages_plugins` (
   `plugin_id` int(11) NOT NULL,
   FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`),
   FOREIGN KEY (`plugin_id`) REFERENCES `plugins`(`id`)
-);
-
-CREATE TABLE IF NOT EXISTS `themes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `posts` (
