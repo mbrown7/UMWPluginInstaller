@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS packages;
 CREATE DATABASE IF NOT EXISTS packages;
 
-GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'host.umwdomains.com' identified by 'package';
+GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'package';
 
 USE packages;
 
