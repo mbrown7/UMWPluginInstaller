@@ -23,7 +23,7 @@
 <h3>Add Plugins</h3>
 <table id='plug_table'>
 <tr>
-<td>Number of Plugins</td><td><input type="number" name="num_plug" id='plug_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePlugins()" /></td>
+<td>Number of Plugins</td><td><input type="number" name="num_plug" id='plug_id' min=0 value=0 style="width:50px" /><input type ="button" id='plug_but' value=" + " onclick="addMorePlugins()" /></td>
 </tr>
 </table>
 	<span id="plugin_response"></span>
@@ -41,7 +41,7 @@
 <h3>Add Posts</h3>
 <table id='post_table'>
 <tr>
-	<td>Number of Posts</td><td><input type="number" name="num_posts" id='post_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePosts()" /></td>
+	<td>Number of Posts</td><td><input type="number" name="num_posts" id='post_id' min=0 value=0 style="width:50px" /><input type ="button" id='post_but' value=" + " onclick="addMorePosts()" /></td>
 </tr>
 </table>
 	<span id="post_response"></span>
@@ -49,7 +49,7 @@
 <h3>Add Pages</h3>
 <table id='page_table'>
 <tr>
-	<td>Number of Pages</td><td><input type="number" name="num_pages" id='page_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePages()" /></td>
+	<td>Number of Pages</td><td><input type="number" name="num_pages" id='page_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " id='page_but' onclick="addMorePages()" /></td>
 </tr>
 </table>
 	<span id="page_response"></span>
@@ -57,7 +57,7 @@
 <h3>Categories</h3>
 <table id='cat_table'>
 <tr>
-	<td>Number of Categories</td><td><input type="number" name="num_cats" id='cat_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMoreCategories()" /></td>
+	<td>Number of Categories</td><td><input type="number" name="num_cats" id='cat_id' min=0 value=0 style="width:50px" /><input type ="button" id='cat_but' value=" + " onclick="addMoreCategories()" /></td>
 </tr>
 </table>
 	<span id="category_response"></span>
@@ -65,7 +65,7 @@
 <h3>Tags</h3>
 <table id='tag_table'>
 <tr>
-	<td>Number of Tags</td><td><input type="number" name="num_tags" id='tag_id' min=0 value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMoreTags()" /></td>
+	<td>Number of Tags</td><td><input type="number" name="num_tags" id='tag_id' min=0 value=0 style="width:50px" /><input type ="button" id='tag_id' value=" + " onclick="addMoreTags()" /></td>
 </tr>
 </table>
 	<span id="tag_response"></span>
@@ -97,11 +97,10 @@
         		var plugBoxName = "textBox"+plugCountBox;
         		document.getElementById('plugin_response').innerHTML+='<table><tr><td>Plugin Name</td><td><input type="text" name="plugin_name'+plugCountBox+'"/></td></tr><tr><td>Plugin URL</td><td><input type="url" name="plugin_url'+plugCountBox+'" /></td></tr></table>';
 	        	plugCountBox += 1;
-		} 
-		var Parent = document.getElementById('plug_table');
-		while(Parent.hasChildNodes()) {
-			Parent.removeChild(Parent.firstChild);
-		} 
+		}
+		document.getElementById('plug_id').readOnly=true;
+		var pb = document.getElementById('plug_but');
+		pb.parentNode.removeChild(pb); 
 	}
 
 	function addMorePosts() {
@@ -111,10 +110,9 @@
 			document.getElementById('post_response').innerHTML+='<table><tr><td>Post Title</td><td><input type="text" name="post_title'+postCountBox+'" /></td></tr><tr><td>Content</td><td><textarea name="post_content'+postCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 			postCountBox +=1;
 		}
-		var Parent = document.getElementById('post_table');
-		while(Parent.hasChildNodes()) {
-			Parent.removeChild(Parent.firstChild);
-		} 
+		document.getElementById('post_id').readOnly=true;
+		var pb1 = document.getElementById('post_but');
+		pb1.parentNode.removeChild(pb1); 
 	}
 
 	function addMorePages() {
@@ -124,10 +122,9 @@
 			document.getElementById('page_response').innerHTML+='<table><tr><td>Page Name</td><td><input type="text" name="page_name'+pageCountBox+'" /></td></tr><tr><td>Description</td><td><textarea name="page_desc'+pageCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Slug</td><td><textarea name="page_slug'+pageCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 			pageCountBox += 1;
 		}
-		var Parent = document.getElementById('page_table');
-		while(Parent.hasChildNodes()) {
-			Parent.removeChild(Parent.firstChild);
-		} 
+		document.getElementById('page_id').readOnly=true;
+		var pb2 = document.getElementById('page_but');
+		pb2.parentNode.removeChild(pb2); 
 	}
 
 	function addMoreCategories() {
@@ -137,10 +134,9 @@
 			document.getElementById('category_response').innerHTML+='<table><tr><td>Category Name</td><td><input type="text" name="category_name'+categoryCountBox+'" /></td></tr><tr><td>Description</td><td><textarea name="category_desc'+categoryCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Slug</td><td><textarea name="category_slug'+categoryCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 			categoryCountBox += 1;
 		}
-		var Parent = document.getElementById('cat_table');
-		while(Parent.hasChildNodes()) {
-			Parent.removeChild(Parent.firstChild);
-		} 
+		document.getElementById('cat_id').readOnly=true;
+		var pb3 = document.getElementById('cat_but');
+		pb3.parentNode.removeChild(pb3); 
 	}
 
 	function addMoreTags() {
@@ -150,10 +146,9 @@
 			document.getElementById('tag_response').innerHTML+='<table><tr><td>Tag Name</td><td><input type="text" name="tag_name'+tagCountBox+'" /></td></tr><tr><td>Slug</td><td><textarea name="tag_slug'+tagCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 			tagCountBox += 1;
 		}
-		var Parent = document.getElementById('tag_table');
-		while(Parent.hasChildNodes()) {
-			Parent.removeChild(Parent.firstChild);
-		} 
+		document.getElementById('tag_id').readOnly=true;
+		var pb4 = document.getElementById('tag_but');
+		pb4.parentNode.removeChild(pb4);
 	}
 </script>
 
