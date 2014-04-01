@@ -44,13 +44,13 @@ def createPkg():
 		numberOfPlugins = MySQLdb.escape_string(request.form['num_plug'])
 		numberOfPluginsInt = int(numberOfPlugins)
 		for x in range(1, numberOfPluginsInt+1)
-			string1 = 'plugin_name' + x
-			string2 = 'plugin_url' + x
+			string1 = 'plugin_name' + str(x)
+			string2 = 'plugin_url' + str(x)
 			#Get the plugin data
 			pluginName = MySQLdb.escape_string(request.form[string1])
 			pluginAddress = MySQLdb.escape_string(request.form[string2])
 			#Only do if the plugin does not already exist:
-			query = "INSERT INTO plugins (name, address) VALUES ('%s','%s') WHERE NOT EXISTS (SELECT name FROM plugins WHERE name = '%s')" % (pluginName, pluginAddress, pluginName)
+			query = "INSERT INTO plugins (name, address) SELECT name, address FROM (SELECT '%s' AS name,'%s' AS address) t WHERE NOT EXISTS (SELECT * FROM plugins WHERE name = '%s')" % (pluginName, pluginAddress, pluginName)
 			cur.execute(query)
 			db.commit()
 			#Then, get the plugin ID number (we do this whether we just created the plugin now or not)
@@ -66,8 +66,8 @@ def createPkg():
 		numberOfPosts = MySQLdb.escape_string(request.form['num_posts'])
 		numberOfPostsInt = int(numberOfPosts)
 		for x in range(1, numberOfPostsInt+1)
-			string1 = 'post_title' + x
-			string2 = 'post_content' + x
+			string1 = 'post_title' + str(x)
+			string2 = 'post_content' + str(x)
 			#Get the post data
 			postTitle = MySQLdb.escape_string(request.form[string1])
 			postContent = MySQLdb.escape_string(request.form[string2])
@@ -79,9 +79,9 @@ def createPkg():
 		numberOfPages = MySQLdb.escape_string(request.form['num_pages'])
 		numberOfPagesInt = int(numberOfPages)
 		for x in range(1, numberOfPagesInt+1)
-			string1 = 'page_name' + x
-			string2 = 'page_desc' + x
-			string3 = 'page_slug' + x
+			string1 = 'page_name' + str(x)
+			string2 = 'page_desc' + str(x)
+			string3 = 'page_slug' + str(x)
 			#Get page information
 			pageTitle = MySQLdb.escape_string(request.form[string1])
 			pageDesc = MySQLdb.escape_string(request.form[string2])
@@ -99,9 +99,9 @@ def createPkg():
 		numberOfCategories = MySQLdb.escape_string(request.form['num_cats'])
 		numberOfCategoriesInt = int(numberOfCategories)
 		for x in range(1, numberOfCategoriesInt+1)
-			string1 = 'category_name'+x
-			string2 = 'category_desc'+x
-			string3 = 'category_slug'+x
+			string1 = 'category_name' + str(x)
+			string2 = 'category_desc' + str(x)
+			string3 = 'category_slug' + str(x)
 			#Get category information
 			catName = MySQLdb.escape_string(request.form[string1])
 			catDesc = MySQLdb.escape_string(request.form[string2])
@@ -114,8 +114,8 @@ def createPkg():
 		numberOfTags = MySQLdb.escape_string(request.form['num_tags'])
 		numberOfTagsInt = int(numberOfTags)
 		for x in range(1, numberOfTagsInt+1)
-			string1 = 'tag_name' + x
-			string2 = 'tag_slug' + x
+			string1 = 'tag_name' + str(x)
+			string2 = 'tag_slug' + str(x)
 			#Get tag information
 			tagName = MySQLdb.escape_string(request.form[string1])
 			tagSlug = MySQLdb.escape_string(request.form[string2])
