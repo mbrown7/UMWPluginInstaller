@@ -11,16 +11,16 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `professor` varchar(50) DEFAULT NULL,
   `course` varchar(50) DEFAULT NULL,
   `semester` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `theme_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`theme_id`) REFERENCES `themes`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `package_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `packages_plugins` (
@@ -34,22 +34,13 @@ CREATE TABLE IF NOT EXISTS `themes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `package_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
-  `author` varchar(50) DEFAULT NULL,
-  `excerpt` varchar(50) DEFAULT NULL,
   `content` blob DEFAULT NULL,
-  `format` varchar(50) DEFAULT NULL,
-  `allow_comments` BOOL DEFAULT 1,
-  `sticky` BOOL DEFAULT 0,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
@@ -59,9 +50,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
   `description` blob DEFAULT NULL,
-  `allow_comments` BOOL DEFAULT 1,
   `slug` blob DEFAULT NULL,
-  `publish` BOOL DEFAULT 1,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)
@@ -71,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
   `slug` blob DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -89,9 +77,6 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `slug` blob DEFAULT NULL,
-  `count` int(11) DEFAULT NULL,
-  `html_url` varchar(100) DEFAULT NULL,
-  `rss_url` varchar(100) DEFAULT NULL,
   `package_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`)

@@ -84,13 +84,13 @@
 
 	var pageCountBox = 1;
 	var pageBoxName = 0;
-	
+
 	var categoryCountBox = 1;
 	var categoryBoxName = 0;
 
 	var tagCountBox = 1;
 	var tagBoxName = 0;
-	
+
 	function addMorePlugins() {
         	var plugBoxName = "textBox"+plugCountBox;
         	document.getElementById('plugin_response').innerHTML+='<table><tr><td>Plugin Name</td><td><input type="text" name="plugin_name'+plugCountBox+'"/></td></tr><tr><td>Plugin URL</td><td><input type="url" name="plugin_url'+plugCountBox+'" /></td></tr></table>';
@@ -102,7 +102,7 @@
 		document.getElementById('post_response').innerHTML+='<table><tr><td>Post Title</td><td><input type="text" name="post_title'+postCountBox+'" /></td></tr><tr><td>Content</td><td><textarea name="post_content'+postCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 		postCountBox +=1;
 	}
-	
+
 	function addMorePages() {
 		var pageBoxName = "textBox"+pageCountBox;
 		document.getElementById('page_response').innerHTML+='<table><tr><td>Page Name</td><td><input type="text" name="page_name'+pageCountBox+'" /></td></tr><tr><td>Description</td><td><textarea name="page_desc'+pageCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Slug</td><td><textarea name="page_slug'+pageCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
