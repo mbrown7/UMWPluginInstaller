@@ -21,8 +21,12 @@
 
 
 <h3>Add Plugins</h3>
+<table>
+<tr>
+<td>Number of Plugins</td><td><input type="number" name="num_plug" value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePlugins()" /></td>
+</tr>
+</table><br>
 	<span id="plugin_response"></span>
-	<input type ="button" value=" + " onclick="addMorePlugins()" /> Add Plugin<br>
 
 <h3>Add a Theme</h3>
 <table>
@@ -35,20 +39,36 @@
 
 <br>
 <h3>Add Posts</h3>
+<table>
+<tr>
+	<td>Number of Posts</td><td><input type="number" name="num_posts" value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePosts()" /></td>
+</tr>
+</table><br>
 	<span id="post_response"></span>
-	<input type="button" value=" + " onclick="addMorePosts()" /> Add Post<br>
 
 <h3>Add Pages</h3>
+<table>
+<tr>
+	<td>Number of Pages</td><td><input type="number" name="num_pages" value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMorePages()" /></td>
+</tr>
+</table><br>
 	<span id="page_response"></span>
-	<input type ="button" value=" + " onclick="addMorePages()" /> Add Page<br>
 
 <h3>Categories</h3>
+<table>
+<tr>
+	<td>Number of Categories</td><td><input type="number" name="num_cats" value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMoreCategories()" /></td>
+</tr>
+</table><br>
 	<span id="category_response"></span>
-	<input type ="button" value=" + " onclick="addMoreCategories()" /> Add Category<br>
 
 <h3>Tags</h3>
+<table>
+<tr>
+	<td>Number of Tags</td><td><input type="number" name="num_tags" value=0 style="width:50px" /><input type ="button" value=" + " onclick="addMoreTags()" /></td>
+</tr>
+</table><br>
 	<span id="tag_response"></span>
-	<input type ="button" value=" + " onclick="addMoreTags()" /> Add Tag<br>
 
 <br><input type="submit" value="Create Package" name="submit" />
 
@@ -79,13 +99,13 @@
 
 	function addMorePosts() {
 		var postBoxName = "textBox"+postCountBox;
-		document.getElementById('post_response').innerHTML+='<table><tr><td>Post Type</td><td><input type="text" name="post_type'+postCountBox+'" /></td></tr><tr><td>Post Status</td><td><input type="text" name="post_status'+postCountBox+'" /></td></tr><tr><td>Post Title</td><td><input type="text" name="post_title'+postCountBox+'" /></td></tr><tr><td>Author</td><td><input type="text" name="post_author'+postCountBox+'" /></td></tr><tr><td>Excerpt</td><td><input type="text" name="post_excerpt'+postCountBox+'" /></td></tr><tr><td>Content</td><td><textarea name="post_content'+postCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Format</td><td><input type="text" name="post_format'+postCountBox+'" /></td></tr><tr><td>Allow Comments</td><td><input type="radio" name="post_comments'+postCountBox+'" checked="checked" value="true" /> Yes <input type="radio" name="post_comments'+postCountBox+'" value="false" /> No </td></tr><tr><td>Allow Sticky</td><td><input type="radio" name="post_sticky'+postCountBox+'" value="true" /> Yes <input type="radio" name="post_sticky'+postCountBox+'" checked="checked" value="false" /> No </td></tr></table>';
+		document.getElementById('post_response').innerHTML+='<table><tr><td>Post Title</td><td><input type="text" name="post_title'+postCountBox+'" /></td></tr><tr><td>Content</td><td><textarea name="post_content'+postCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 		postCountBox +=1;
 	}
 	
 	function addMorePages() {
 		var pageBoxName = "textBox"+pageCountBox;
-		document.getElementById('page_response').innerHTML+='<table><tr><td>Page Name</td><td><input type="text" name="page_name'+pageCountBox+'" /></td></tr><tr><td>Description</td><td><textarea name="page_desc'+pageCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Allow comments </td><td><input type="radio" name="page_comments'+pageCountBox+'" checked="checked" value="true" /> Yes <input type="radio" name="page_comments'+pageCountBox+'" value="false" /> No </td></tr><tr><td>Slug</td><td><textarea name="page_slug'+pageCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Publish</td><td><input type="radio" name="page_publish'+pageCountBox+'" checked="checked" value="true" /> Yes <input type="radio" name="page_publish'+pageCountBox+'" value="false" /> No </td></tr></table>';
+		document.getElementById('page_response').innerHTML+='<table><tr><td>Page Name</td><td><input type="text" name="page_name'+pageCountBox+'" /></td></tr><tr><td>Description</td><td><textarea name="page_desc'+pageCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Slug</td><td><textarea name="page_slug'+pageCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
 		pageCountBox += 1;
 	}
 
@@ -97,7 +117,8 @@
 
 	function addMoreTags() {
 		var tagBoxName = "textBox"+tagCountBox;
-		document.getElementById('tag_response').innerHTML+='<table><tr><td>Tag Name</td><td><input type="text" name="tag_name'+tagCountBox+'" /></td></tr><tr><td>Slug</td><td><textarea name="tag_slug'+tagCountBox+'" rows=6 cols=42></textarea></td></tr><tr><td>Count</td><td><input type="number" name="tag_count'+tagCountBox+'" /></td></tr><tr><td>Tag HTML URL</td><td><input type="url" name="tag_html_url'+tagCountBox+'" /></td></tr><tr><td>Tag RSS URL</td><td><input type="url" name="tag_rss_url'+tagCountBox+'" /></td></tr></table>';
+		document.getElementById('tag_response').innerHTML+='<table><tr><td>Tag Name</td><td><input type="text" name="tag_name'+tagCountBox+'" /></td></tr><tr><td>Slug</td><td><textarea name="tag_slug'+tagCountBox+'" rows=6 cols=42></textarea></td></tr></table>';
+
 		tagCountBox += 1;
 	}
 </script>
