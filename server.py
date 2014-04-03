@@ -12,7 +12,6 @@ def mainIndex():
 def createPkg():
   db = utils.db_connect()
   cur = db.cursor(cursorclass=MySQLdb.cursors.DictCursor)
-  print request.method
   if request.method =='POST':
     #Get package data
     packageName = MySQLdb.escape_string(request.form['package_name'])
@@ -43,7 +42,6 @@ def createPkg():
     #Get the number of plugins there will be
     numberOfPlugins = MySQLdb.escape_string(request.form['num_plug'])
     numberOfPluginsInt = int(numberOfPlugins)+1
-    print numberOfPluginsInt
     for x in range(1, numberOfPluginsInt):
       string1 = 'plugin_name' + str(x)
       string2 = 'plugin_url' + str(x)
@@ -89,7 +87,7 @@ def createPkg():
       pageDesc = MySQLdb.escape_string(request.form[string2])
       pageSlug = MySQLdb.escape_string(request.form[string3])
       #Put this page into the DB
-      query = "INSERT INTO pages (title, description, package_id) VALUES ('%s','%s','%s',%d)" % (pageTitle, pageDesc, pageSlug, pid)
+      query = "INSERT INTO pages (title, description, slug, package_id) VALUES ('%s','%s','%s',%d)" % (pageTitle, pageDesc, pageSlug, pid)
       cur.execute(query)
       db.commit()
 			
@@ -123,6 +121,8 @@ def createPkg():
       tagSlug = MySQLdb.escape_string(request.form[string2])
       #Put this tag into the DB
       query = "INSERT INTO tags (name, slug, package_id) VALUES ('%s','%s',%d)" % (tagName, tagSlug, pid)
+      cur.execute(query)
+      db.commit()
 
   return render_template('pkgCreator.html')
 
