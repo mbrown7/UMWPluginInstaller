@@ -3,6 +3,7 @@ CREATE DATABASE IF NOT EXISTS packages;
 
 GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'localhost' identified by 'package';
 GRANT ALL PRIVILEGES ON packages.* to 'dtlt'@'host.umwdomains.com' identified by 'package';
+GRANT ALL PRIVILEGES ON packages.* to 'installe'@'localhost' identified by '20pslpurgiinng14';
 
 USE packages;
 
