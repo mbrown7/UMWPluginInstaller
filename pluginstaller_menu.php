@@ -44,10 +44,10 @@
 <td>
 	<select name="package">
 		<option selected disabled>Choose a package</option>
-		<?php // SQL QUERY TO RETRIEVE EVERY TYPE OF CUSTOMER
-			$sql = "SELECT name FROM `package` GROUP BY `name`";
-			$result = mysql_query($sql);
-			while($row = mysql_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
+		<?php
+			$sql = "SELECT name FROM `packages` WHERE 1 GROUP BY `name`";
+			$result = mysqli_query($db, $sql);
+			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
         ?>
 	</select></td>
 	<td><?php submit_button('Install', 'primary', 'install') ?></td>
