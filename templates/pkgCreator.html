@@ -6,7 +6,7 @@
 
 <body>
 <h1>WordPress Package Creator</h1>
-<form method="post" action="/pkgCreate">
+<form method="post" action="/pkgCreator.html">
 <table>
 <tr>
 	<td>Package Name</td><td><input type="text" name="package_name"></td>
@@ -65,7 +65,7 @@
 <h3>Tags</h3>
 <table id='tag_table'>
 <tr>
-	<td>Number of Tags</td><td><input type="number" name="num_tags" id='tag_id' min=0 value=0 style="width:50px" /><input type ="button" id='tag_id' value=" + " onclick="addMoreTags()" /></td>
+	<td>Number of Tags</td><td><input type="number" name="num_tags" id='tag_id' min=0 value=0 style="width:50px" /><input type ="button" id='tag_but' value=" + " onclick="addMoreTags()" /></td>
 </tr>
 </table>
 	<span id="tag_response"></span>
