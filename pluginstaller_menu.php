@@ -76,29 +76,27 @@
 	if ($downloader->plugin_info()){
 		echo 'Installation successfully complete. <a href="plugins.php" target="_parent">Go to Plugins page to activate!</a>';
 	}
-	
-  } else { ?>
+} else { ?>
 
-<table><tr>
-<form action="pluginstaller_search.php" method="post">
-<td>
-<input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
-<td><?php submit_button('Search', 'primary', 'search') ?></td>
-</form></tr>
-<tr><td>-or-</td></tr>
-<tr>
-<form id="install" action="" method="post"> 
-<td>
-	<select name="package">
-		<option selected disabled>Choose a package</option>
-		<?php
-			$sql = "SELECT name FROM `packages` WHERE 1 GROUP BY `name`";
-			$result = mysqli_query($db, $sql);
-			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
-        ?>
-	</select></td>
-	<td><?php submit_button('Install', 'primary', 'install') ?></td>
-</form></tr></table>
-  <?php } 
-?>
+	<table><tr>
+	<form action="pluginstaller_search.php" method="post">
+	<td>
+	<input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
+	<td><?php submit_button('Search', 'primary', 'search') ?></td>
+	</form></tr>
+	<tr><td>-or-</td></tr>
+	<tr>
+	<form id="install" action="" method="post"> 
+	<td>
+		<select name="package">
+			<option selected disabled>Choose a package</option>
+			<?php
+				$sql = "SELECT name FROM `packages` WHERE 1 GROUP BY `name`";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
+			?>
+		</select></td>
+		<td><?php submit_button('Install', 'primary', 'install') ?></td>
+	</form></tr></table>
+<?php } ?>
 </div>
