@@ -7,29 +7,52 @@
 <?php
   if($_POST['install']) {
 	// CODE GOES HERE TO FETCH AND INSTALL
-	$plugins_dir = plugins_url();
-	$theme_dir = get_theme_root_uri();
-	$site_dir = site_url();	
-	echo $plugins_dir . "</br>";
-	echo $theme_dir . "</br>";
-	echo $site_dir . "</br>";	
+	//$plugins_dir = plugins_url();
+	//$theme_dir = get_theme_root_uri();
+	//$site_dir = site_url();	
 
 	$package_name = $_POST['package'];
 
-	$query = "SELECT pl.name as name FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.name";
-	$query .= $package_name; //change this to pl.url (or whatever) and change below to actually download from this url.
+	$query = "SELECT pl.name as name, pl.address as url FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.name = '";
+	$query .= $package_name ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
 	while($row = mysqli_fetch_array($result)){
 		$plugin_name = $row['name'];
-
-		echo "<tr>
-		<th>$plugin_name</th>
-		</tr>";
-		echo "</table>";
-	}	 
- 	echo "HELLOOOO";
+		$plugin_url = $row['url'];
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';  
+		$downloader = new Plugin_Upgrader();
+		$downloader->install($plugin_url);
+            
+       	/*if ($downloader->plugin_info()){
+			echo '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $downloader->plugin_info(), 'activate-plugin_' . $plugin_name . 'php') . '" title="' . esc_attr__('Activate this plugin') . '" target="_parent">' . __('Activate Plugin') . '</a>';
+	 	}*/
+	}
+	
+	$query = "SELECT po.title as title, po.content as content FROM posts as po INNER JOIN packages as pk ON po.package_id = pk.id WHERE pk.name = '";
+	$query .= $package_name ."'";
+	
+	$result = mysqli_query($db, $query) or die(mysqli_error($db));
+	
+	global $user_ID;
+	while($row = mysqli_fetch_array($result)){
+		$new_post = array(
+			'post_title' => $row['title'],
+			'post_content' => $row['content'],
+			'post_status' => 'publish',
+			'post_date' => date('Y-m-d H:i:s'),
+			'post_author' => $user_ID,
+			'post_type' => 'post',
+			'post_category' => array(0)
+		);
+		$post_id = wp_insert_post($new_post);
+	}
+	
+	if ($downloader->plugin_info()){
+		echo 'Installation successfully complete. <a href="plugins.php" target="_parent">Go to Plugins page to activate!</a>';
+	}
+	
   } else { ?>
 
 <table><tr>
