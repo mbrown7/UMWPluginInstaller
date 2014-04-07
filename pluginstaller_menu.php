@@ -5,7 +5,7 @@
 <h3>PlugInstaller Menu</h3>
 
 <?php
-  if($_POST['install']) {
+if($_POST['install']) {
 	// CODE GOES HERE TO FETCH AND INSTALL
 	//$plugins_dir = plugins_url();
 	//$theme_dir = get_theme_root_uri();
@@ -79,26 +79,25 @@
 	
   } else { ?>
 
-<table><tr>
-<form action="pluginstaller_search.php" method="post">
-<td>
-<input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
-<td><?php submit_button('Search', 'primary', 'search') ?></td>
-</form></tr>
-<tr><td>-or-</td></tr>
-<tr>
-<form id="install" action="" method="post"> 
-<td>
-	<select name="package">
-		<option selected disabled>Choose a package</option>
-		<?php
+	<table><tr>
+	<form action="pluginstaller_search.php" method="post">
+	<td>
+	<input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
+	<td><?php submit_button('Search', 'primary', 'search') ?></td>
+	</form></tr>
+	<tr><td>-or-</td></tr>
+	<tr>
+	<form id="install" action="" method="post"> 
+	<td>
+		<select name="package">
+			<option selected disabled>Choose a package</option>
+			<?php
 			$sql = "SELECT name FROM `packages` WHERE 1 GROUP BY `name`";
 			$result = mysqli_query($db, $sql);
 			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
-        ?>
-	</select></td>
+			?>
+		</select></td>
 	<td><?php submit_button('Install', 'primary', 'install') ?></td>
-</form></tr></table>
-  <?php } 
-?>
+	</form></tr></table>
+<?php } ?>
 </div>
