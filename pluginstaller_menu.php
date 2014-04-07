@@ -47,7 +47,31 @@
 			'post_category' => array(0)
 		);
 		$post_id = wp_insert_post($new_post);
+		if (post_id == 0){ echo 'Failed to add post.'; }
 	}
+	
+	$query = "SELECT pa.title as title, pa.description as content, pa.slug as slug FROM pages as pa INNER JOIN packages as pk ON pa.package_id = pk.id WHERE pk.name = '";
+	$query .= $package_name ."'";
+	
+	$result = mysqli_query($db, $query) or die(mysqli_error($db));
+	
+	while($row = mysqli_fetch_array($result)){
+		$new_post = array(
+			'post_title' => $row['title'],
+			'post_name' => $row['slug'],
+			'post_content' => $row['content'],
+			'post_status' => 'publish',
+			'post_date' => date('Y-m-d H:i:s'),
+			'post_parent'  = 0;
+			'post_author' => $user_ID,
+			'post_type' => 'page',
+			'post_category' => array(0)
+		);
+		$page_id = wp_insert_post($new_post);
+		if (page_id == 0){ echo 'Failed to add page.'; }
+	}
+	
+	//ADD THEME, CATEGORIES, TAGS HERE!
 	
 	if ($downloader->plugin_info()){
 		echo 'Installation successfully complete. <a href="plugins.php" target="_parent">Go to Plugins page to activate!</a>';
