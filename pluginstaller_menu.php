@@ -7,7 +7,7 @@
 <?php
 if($_POST['install']) {
 	// CODE GOES HERE TO FETCH AND INSTALL
-	//$plugins_dir = plugins_url();
+	$plugins_dir = plugins_url();
 	//$theme_dir = get_theme_root_uri();
 	//$site_dir = site_url();	
 
@@ -22,9 +22,11 @@ if($_POST['install']) {
 	while($row = mysqli_fetch_array($result)){
 		$plugin_name = $row['name'];
 		$plugin_url = $row['url'];
-		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';  
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 		$downloader = new Plugin_Upgrader();
 		$downloader->install($plugin_url);
+		$activated = activate_plugin($plugins_dir . '/' . $plugin_name . '.php');
+		if ($activated) { echo 'Error activating plugin.'; }
             
        	/*if ($downloader->plugin_info()){
 			echo '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $downloader->plugin_info(), 'activate-plugin_' . $plugin_name . 'php') . '" title="' . esc_attr__('Activate this plugin') . '" target="_parent">' . __('Activate Plugin') . '</a>';
@@ -92,26 +94,34 @@ if($_POST['install']) {
 	}
 	
 	//Add tags
-	$query = "SELECT t.name as name, t.slug as slug FROM tags as t INNER JOIN packages as pk ON t.package_id = pk.id WHERE pk.name = '";
+	$query = "SELECT t.name as name, t.description as description, t.slug as slug FROM tags as t INNER JOIN packages as pk ON t.package_id = pk.id WHERE pk.name = '";
 	$query .= $package_name ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	while($row = mysqli_fetch_array($result)){
 		$tag_defaults = array (
-			//could add description with 'description' => $row['description'], if we add that column to the db.
+			'description' => $row['description'],
 			'slug' => $row['slug']
-		)
+		);
 		$tag_id = wp_insert_term( $row['name'], 'post_tag', $tag_defaults );
 		if ($tag_id == 0) { echo 'Failed to create tag.'; }
 	}
 	
 	//ADD THEME HERE!
+	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON th.package_id = pk.id WHERE pk.name = '";
+	$query .= $package_name ."'";
 	
-	if ($downloader->plugin_info()){
-		echo 'Installation successfully complete. <a href="plugins.php" target="_parent">Go to Plugins page to activate!</a>';
+	$result = mysqli_query($db, $query) or die(mysqli_error($db));
+/*
+	while($row = mysqli_fetch_array($result)){
+		$plugin_name = $row['name'];
+		$plugin_url = $row['url'];
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		$downloader = new Plugin_Upgrader();
+		$downloader->install($plugin_url);
 	}
-	
-  } else { ?>
+*/	
+} else { ?>
 
 	<table><tr>
 	<form action="pluginstaller_search.php" method="post">
