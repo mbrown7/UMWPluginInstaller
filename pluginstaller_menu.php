@@ -112,15 +112,15 @@ if($_POST['install']) {
 	$query .= $package_name ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
-/*
+
 	while($row = mysqli_fetch_array($result)){
-		$plugin_name = $row['name'];
-		$plugin_url = $row['url'];
+		$theme_name = $row['name'];
+		$theme_url = $row['url'];
 		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		$downloader = new Plugin_Upgrader();
-		$downloader->install($plugin_url);
+		$downloader = new Theme_Upgrader();
+		$downloader->install($theme_url);
 	}
-*/	
+	
 } else { ?>
 
 	<table><tr>
