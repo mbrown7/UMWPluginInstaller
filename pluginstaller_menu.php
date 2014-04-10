@@ -6,11 +6,6 @@
 
 <?php
 if($_POST['install']) {
-	// CODE GOES HERE TO FETCH AND INSTALL
-	//$plugins_dir = plugins_url();
-	//$theme_dir = get_theme_root_uri();
-	//$site_dir = site_url();	
-
 	$package_name = $_POST['package'];
 
 	$query = "SELECT pl.name as name, pl.address as url FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.name = '";
