@@ -8,6 +8,8 @@
 if($_POST['install']) {
 	// CODE GOES HERE TO FETCH AND INSTALL
 	$plugins_dir = plugins_url();
+	//$theme_dir = get_theme_root_uri();
+	//$site_dir = site_url();	
 
 	$package_name = $_POST['package'];
 
@@ -23,9 +25,12 @@ if($_POST['install']) {
 		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 		$downloader = new Plugin_Upgrader();
 		$downloader->install($plugin_url);
+		
+		/*
 		$activated = activate_plugin($plugins_dir . '/' . $plugin_name . '.php');
 		if ($activated) { echo 'Error activating plugin.'; }
-            
+		*/            
+
        	/*if ($downloader->plugin_info()){
 			echo '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $downloader->plugin_info(), 'activate-plugin_' . $plugin_name . 'php') . '" title="' . esc_attr__('Activate this plugin') . '" target="_parent">' . __('Activate Plugin') . '</a>';
 	 	}*/
@@ -105,12 +110,11 @@ if($_POST['install']) {
 		if ($tag_id == 0) { echo 'Failed to create tag.'; }
 	}
 	
-	//ADD THEME HERE!
-	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON th.package_id = pk.id WHERE pk.name = '";
+	//Add theme
+	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON pk.theme_id = th.id WHERE pk.name = '";
 	$query .= $package_name ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
-
 	while($row = mysqli_fetch_array($result)){
 		$theme_name = $row['name'];
 		$theme_url = $row['url'];
@@ -118,25 +122,16 @@ if($_POST['install']) {
 		$downloader = new Theme_Upgrader();
 		$downloader->install($theme_url);
 	}
-	
 } else { ?>
-
 	<table><tr>
-	<form action="pluginstaller_search.php" method="post">
-	<td>
-	<input type="text" name="search_term" placeholder="Search by course or professor" size="30" /></td>
-	<td><?php submit_button('Search', 'primary', 'search') ?></td>
-	</form></tr>
-	<tr><td>-or-</td></tr>
-	<tr>
 	<form id="install" action="" method="post"> 
 	<td>
 		<select name="package">
 			<option selected disabled>Choose a package</option>
 			<?php
-			$sql = "SELECT name FROM `packages` WHERE 1 GROUP BY `name`";
+			$sql = "SELECT name, course, professor, semester FROM `packages` WHERE 1 GROUP BY `course`";
 			$result = mysqli_query($db, $sql);
-			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';}
+			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['course'].' '.$row['professor'].' '.$row['semester'].'</option>';}
 			?>
 		</select></td>
 	<td><?php submit_button('Install', 'primary', 'install') ?></td>
