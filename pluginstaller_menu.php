@@ -5,7 +5,7 @@
 <h3>PlugInstaller Menu</h3>
 
 <?php
-if($_POST['install']) {
+if($_POST['install'] && $_POST['package'] != '') {
 	// CODE GOES HERE TO FETCH AND INSTALL
 	$plugins_dir = plugins_url();
 	//$theme_dir = get_theme_root_uri();
@@ -26,10 +26,13 @@ if($_POST['install']) {
 		$downloader = new Plugin_Upgrader();
 		$downloader->install($plugin_url);
 		
+		$activated = activate_plugin($plugin_name . '.php');
+		if ($activated) { echo 'Error activating plugin.'; }
+
 		/*
 		$activated = activate_plugin($plugins_dir . '/' . $plugin_name . '.php');
 		if ($activated) { echo 'Error activating plugin.'; }
-		*/            
+		*/
 
        	/*if ($downloader->plugin_info()){
 			echo '<a href="' . wp_nonce_url('plugins.php?action=activate&amp;plugin=' . $downloader->plugin_info(), 'activate-plugin_' . $plugin_name . 'php') . '" title="' . esc_attr__('Activate this plugin') . '" target="_parent">' . __('Activate Plugin') . '</a>';
@@ -127,7 +130,7 @@ if($_POST['install']) {
 	<form id="install" action="" method="post"> 
 	<td>
 		<select name="package">
-			<option selected disabled>Choose a package</option>
+			<option value="" disabled selected>Choose a package</option>
 			<?php
 			$sql = "SELECT name, course, professor, semester FROM `packages` WHERE 1 GROUP BY `course`";
 			$result = mysqli_query($db, $sql);
