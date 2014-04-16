@@ -11,11 +11,11 @@ if($_POST['install'] && $_POST['package'] != '') {
 	//$theme_dir = get_theme_root_uri();
 	//$site_dir = site_url();	
 
-	$package_name = $_POST['package'];
+	$package_id = $_POST['package'];
 
 	//Add plugins
 	$query = "SELECT pl.name as name, pl.address as url FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
@@ -41,7 +41,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	
 	//Add posts
 	$query = "SELECT po.title as title, po.content as content FROM posts as po INNER JOIN packages as pk ON po.package_id = pk.id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	
@@ -62,7 +62,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	
 	//Add pages
 	$query = "SELECT pa.title as title, pa.description as content, pa.slug as slug FROM pages as pa INNER JOIN packages as pk ON pa.package_id = pk.id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	
@@ -84,7 +84,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	
 	//Add categories
 	$query = "SELECT c.name as name, c.description as description, c.slug as slug FROM categories as c INNER JOIN packages as pk ON c.package_id = pk.id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	
@@ -101,7 +101,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	
 	//Add tags
 	$query = "SELECT t.name as name, t.description as description, t.slug as slug FROM tags as t INNER JOIN packages as pk ON t.package_id = pk.id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	while($row = mysqli_fetch_array($result)){
@@ -115,7 +115,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	
 	//Add theme
 	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON pk.theme_id = th.id WHERE pk.name = '";
-	$query .= $package_name ."'";
+	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 	while($row = mysqli_fetch_array($result)){
@@ -132,9 +132,9 @@ if($_POST['install'] && $_POST['package'] != '') {
 		<select name="package">
 			<option value="" disabled selected>Choose a package</option>
 			<?php
-			$sql = "SELECT name, course, professor, semester FROM `packages` WHERE 1 GROUP BY `course`";
+			$sql = "SELECT id, course, professor, semester FROM `packages` WHERE 1 GROUP BY `course`";
 			$result = mysqli_query($db, $sql);
-			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['name'].'">'.$row['course'].' '.$row['professor'].' '.$row['semester'].'</option>';}
+			while($row = mysqli_fetch_assoc($result)){echo '<option value="'.$row['id'].'">'.$row['course'].' '.$row['professor'].' '.$row['semester'].'</option>';}
 			?>
 		</select></td>
 	<td><?php submit_button('Install', 'primary', 'install') ?></td>
