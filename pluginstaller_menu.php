@@ -14,7 +14,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	$package_id = $_POST['package'];
 
 	//Add plugins
-	$query = "SELECT pl.name as name, pl.address as url FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.name = '";
+	$query = "SELECT pl.name as name, pl.address as url FROM packages as pk INNER JOIN packages_plugins as pp ON pp.package_id = pk.id INNER JOIN plugins as pl ON pl.id = pp.plugin_id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
@@ -40,7 +40,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	}
 	
 	//Add posts
-	$query = "SELECT po.title as title, po.content as content FROM posts as po INNER JOIN packages as pk ON po.package_id = pk.id WHERE pk.name = '";
+	$query = "SELECT po.title as title, po.content as content FROM posts as po INNER JOIN packages as pk ON po.package_id = pk.id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
@@ -61,7 +61,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	}
 	
 	//Add pages
-	$query = "SELECT pa.title as title, pa.description as content, pa.slug as slug FROM pages as pa INNER JOIN packages as pk ON pa.package_id = pk.id WHERE pk.name = '";
+	$query = "SELECT pa.title as title, pa.description as content, pa.slug as slug FROM pages as pa INNER JOIN packages as pk ON pa.package_id = pk.id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
@@ -83,7 +83,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	}
 	
 	//Add categories
-	$query = "SELECT c.name as name, c.description as description, c.slug as slug FROM categories as c INNER JOIN packages as pk ON c.package_id = pk.id WHERE pk.name = '";
+	$query = "SELECT c.name as name, c.description as description, c.slug as slug FROM categories as c INNER JOIN packages as pk ON c.package_id = pk.id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
@@ -100,7 +100,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	}
 	
 	//Add tags
-	$query = "SELECT t.name as name, t.description as description, t.slug as slug FROM tags as t INNER JOIN packages as pk ON t.package_id = pk.id WHERE pk.name = '";
+	$query = "SELECT t.name as name, t.description as description, t.slug as slug FROM tags as t INNER JOIN packages as pk ON t.package_id = pk.id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
@@ -114,7 +114,7 @@ if($_POST['install'] && $_POST['package'] != '') {
 	}
 	
 	//Add theme
-	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON pk.theme_id = th.id WHERE pk.name = '";
+	$query = "SELECT th.name as name, th.address as url FROM themes as th INNER JOIN packages as pk ON pk.theme_id = th.id WHERE pk.id = '";
 	$query .= $package_id ."'";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
